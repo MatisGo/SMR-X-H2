@@ -1,7 +1,7 @@
 # main.py
 import tkinter as tk
 from display_start import DisplayWindow
-from excel_reader import process_excel_data
+from excel_reader import process_srm_excel_data
 from technical_comparison import compare_technologies
 
 def main():
@@ -15,7 +15,7 @@ def main():
     root.mainloop()
 
 def run_complete_comparison():
-    excel_data = process_excel_data()
+    excel_data = process_srm_excel_data()
     compare_technologies(excel_data)
 
 def compare_two_technologies():

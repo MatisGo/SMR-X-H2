@@ -1,4 +1,5 @@
 # technical_comparison.py
+var=0
 
 def compare_technologies(excel_data):
     if excel_data is None:
@@ -7,18 +8,14 @@ def compare_technologies(excel_data):
     
     try:
         # Access the data
-        srm_data = excel_data['srm']
-        electrolysis_data = excel_data['electrolysis']
-        criteria_data = excel_data['criteria']
-        
+        #for 
+        print (excel_data)
         # Perform comparison logic here
         # This is a placeholder - implement your actual comparison logic
-        print("Performing technical comparison...")
+        #print("Performing technical comparison...")
         
-        # Example of what you might do:
-        # 1. Apply criteria weights
-        # 2. Compare technologies
-        # 3. Generate results
+        quit()
+
         
     except Exception as e:
         print(f"Error during technical comparison: {e}")

@@ -44,7 +44,7 @@ class DisplayWindow:
         footer_frame.pack(side="bottom", pady=20)
         
         footer_text = ttk.Label(footer_frame, 
-                               text="Select an option to begin your analysis",
+                               text="Select an option ",
                                font=("Arial", 12))
         footer_text.pack()
 
