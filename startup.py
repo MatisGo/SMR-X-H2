@@ -4,8 +4,8 @@
 #   ├── main.py
 #   ├── excel_reader.py
 #   ├── technical_comparison.py
-#   ├── SRM Technologies.xlsx
-#   ├── Electrolysis technology.xlsx
+#   ├── DATA SMR.xlsx
+#   ├── EDATA ELECTROLYSIS.xlsx
 #   └── Criteria ranking.xlsx
 
 # startup.py

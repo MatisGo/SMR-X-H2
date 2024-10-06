@@ -8,9 +8,9 @@ def process_excel_data():
         current_dir = os.path.dirname(os.path.abspath(__file__))
         
         # Define Excel file paths
-        srm_file = os.path.join(current_dir, 'SRM Technologies.xlsx')
-        electrolysis_file = os.path.join(current_dir, 'Electrolysis technology.xlsx')
-        criteria_file = os.path.join(current_dir, 'Criteria ranking.xlsx')
+        srm_file = os.path.join(current_dir, 'DATA SMR.xlsx')
+        electrolysis_file = os.path.join(current_dir, 'DATA ELECTROLYSIS.xlsx')
+        criteria_file = os.path.join(current_dir, 'Criteria Ranking.xlsx')
         
         # Read Excel files
         srm_data = pd.read_excel(srm_file)
