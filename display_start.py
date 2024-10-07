@@ -6,7 +6,7 @@ class DisplayWindow:
     def __init__(self, root, callbacks):
         self.root = root
         self.root.title("Technology Comparison Tool")
-        self.root.geometry("800x600")  # Increased window size
+        self.root.geometry("800x600")  # Window size
         
         # Configure style
         style = ttk.Style()

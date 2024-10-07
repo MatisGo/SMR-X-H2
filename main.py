@@ -15,8 +15,9 @@ def main():
     root.mainloop()
 
 def run_complete_comparison():
-    excel_data = process_srm_excel_data()
-    compare_technologies(excel_data)
+    excel_data_srm = process_srm_excel_data()
+    #excel_data_electrolysis = process_electrolysis_excel_data() #To be activated when Process electrolysis_excel_data() is ready
+    compare_technologies(excel_data_srm)
 
 def compare_two_technologies():
     # To be implemented
