@@ -48,12 +48,13 @@ def process_electrolysis_excel_data():#Script to read the electrolysis excel Dat
         # Get the current directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         
-        electrolysis_file = os.path.join(current_dir, 'DATA ELECTROLYSIS.xlsx')
+        electrolysis_file = os.path.join(current_dir, 'Electrolyser data.xlsx')
         
         # Define Sheet Name 
         elec_sheet_name = 'Electrolyser'    # Sheet name Electrolyser >Need to be changed
 
         xl2 = pd.read_excel(electrolysis_file, sheet_name=elec_sheet_name, header=0)
+        xl2 = xl2.iloc[1:] # delete Row with units, could be saved Later specifically
         
         
 
