@@ -12,9 +12,7 @@ def process_srm_excel_data():
         current_dir = os.path.dirname(os.path.abspath(__file__))
         
         # Define Excel file paths
-        srm_file = os.path.join(current_dir, 'DATA SMR.xlsx')
-        electrolysis_file = os.path.join(current_dir, 'DATA ELECTROLYSIS.xlsx')#Change place
-        
+        srm_file = os.path.join(current_dir, 'DATA SMR.xlsx')        
         
         # Define Sheet Name 
         srm_sheet_name = 'SMR (Main)'    # Sheet name Data SRM excel
@@ -51,18 +49,26 @@ def process_electrolysis_excel_data():#Script to read the electrolysis excel Dat
         electrolysis_file = os.path.join(current_dir, 'Electrolyser data.xlsx')
         
         # Define Sheet Name 
-        elec_sheet_name = 'Electrolyser'    # Sheet name Electrolyser >Need to be changed
+        elec_sheet_name = 'Script (Main)'    # Sheet name Electrolyser >Need to be changed
 
         xl2 = pd.read_excel(electrolysis_file, sheet_name=elec_sheet_name, header=0)
         xl2 = xl2.iloc[1:] # delete Row with units, could be saved Later specifically
-        
-        
-
-        return
+        main_dict2 = {} # creating the Library
+ 
+        for name2 in xl2['Technology']:
+            if str(name2) != 'nan': # Taking only the fullfilled project names
+                main_dict2[index1] = {} 
+                for column in xl2:
+                    for project_name, val in zip(xl2['Technology'],xl2[column]):
+                        if name2 == project_name:
+                            main_dict2[index1][column] = val
     
-
+                index1 += 1
+        
+        return main_dict2  
+    
     except Exception as e:
-        print(f"Error reading SRM DATA Excel files: {e}")
+        print(f"Error reading Electrolysis Excel files: {e}")
         return None
 
 
