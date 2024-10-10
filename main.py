@@ -4,7 +4,7 @@ from display_start import DisplayWindow
 from excel_reader import process_srm_excel_data
 from excel_reader import process_electrolysis_excel_data
 from technical_comparison import compare_technologies
-from C2P_Data_Presentation import C2P_Data_Presentation
+from C2P_Data_Presentation import C2P_Run
 
 def main():
     root = tk.Tk()
@@ -31,8 +31,8 @@ def run_complete_comparison():
 def compare_two_technologies():
     #Being Implemented
     data_elec= process_electrolysis_excel_data()
-    excel_data_srm = process_srm_excel_data()
-    comparison_result = C2P_Data_Presentation(data_elec,excel_data_srm)
+    #excel_data_srm = process_srm_excel_data()
+    C2P_Run(data_elec)
 
 
 

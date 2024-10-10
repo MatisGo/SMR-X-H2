@@ -21,7 +21,7 @@ def get_user_selection(options, prompt, max_selection=1):
         print("Invalid input. Please enter numbers only.")
 
 # Main interface function
-def main():
+def C2P_Run(data_elec):
     # Step 1: Ask if user wants to compare electrolysers or nuclear technologies
     comparison_type = get_user_selection(["Electrolyser", "Nuclear"], "Do you want to compare electrolysers technologies or nuclear technologies?")
     
@@ -31,7 +31,7 @@ def main():
     # Step 2: Process according to the user choice
     if comparison_type[0] == "Electrolyser":
         # Step 3: Load electrolyser data
-        df = data_elec()
+        df = data_elec
 
         # Step 4: Offer the choice of available electrolyser technologies (maximum of 2 choices)
         techs = [df[tech]['Technology'] for tech in df]
@@ -65,7 +65,3 @@ def main():
     
     elif comparison_type[0] == "Nuclear":
         print("Nuclear technology comparison is not yet implemented in this example.")
-
-
-if __name__ == "__main__":
-    main()
