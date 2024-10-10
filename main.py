@@ -5,6 +5,8 @@ from excel_reader import process_srm_excel_data
 from excel_reader import process_electrolysis_excel_data
 from technical_comparison import compare_technologies
 from C2P_Data_Presentation import C2P_Run
+from technical_comparison import matching_combinations
+
 
 def main():
     root = tk.Tk()
@@ -21,10 +23,7 @@ def main():
 def run_complete_comparison():
     excel_data_srm = process_srm_excel_data()
     excel_data_electrolysis = process_electrolysis_excel_data() 
-    #Criteria Excel Reading
-    #excel_data_electrolysis = {}
-    #excel_data_electrolysis = {"value1": 42, "value2": "hello", "value3": [1, 2, 3]} 
-    compare_technologies(excel_data_srm,excel_data_electrolysis)
+
 
 
 
