@@ -3,7 +3,6 @@ import tkinter as tk
 from display_start import DisplayWindow
 from excel_reader import process_srm_excel_data
 from excel_reader import process_electrolysis_excel_data
-from technical_comparison import compare_technologies
 from C2P_Data_Presentation import C2P_Run
 from technical_comparison import matching_combinations
 
