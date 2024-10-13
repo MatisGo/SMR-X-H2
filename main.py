@@ -21,7 +21,8 @@ def main():
 
 def run_complete_comparison():
     excel_data_srm = process_srm_excel_data()
-    excel_data_electrolysis = process_electrolysis_excel_data() 
+    excel_data_electrolysis = process_electrolysis_excel_data()
+    Combinations = matching_combinations(excel_data_srm,excel_data_electrolysis)
 
 
 
@@ -38,7 +39,7 @@ def compare_two_technologies():
 def compare_two_projects():
     vara = process_srm_excel_data()
     varb = process_electrolysis_excel_data() 
-    print(vara,varb)
+    print("Function Not Implemented yet")
     # To be implemented
     pass
 
