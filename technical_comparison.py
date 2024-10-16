@@ -3,8 +3,6 @@
 # The Mehodology needs to be explained here
 #
 
-var=0
-
 def matching_combinations(excel_data_srm,excel_data_electrolysis):
     if excel_data_srm is None or excel_data_electrolysis is None:
         print("No data available for comparison")
