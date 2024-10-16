@@ -38,7 +38,6 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
 
                     }
                     matches.append(match_info)
-                    print(match_info)
                 if smr_outlet_coolant <= elec_operating_temp_min and smr_power_output == 0:
                     nomatch_info = {
                         'SMR Technology': smr_data['Project Name'],

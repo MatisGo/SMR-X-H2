@@ -97,7 +97,6 @@ def process_criteria_excel_data():#Script to read the Criteria excel Data
         for header, value in zip(headers, values):
             if pd.notna(header) and pd.notna(value):  # Check if both header and value are not NaN
                 main_dict3[header] = value
-        print(main_dict3)
         return main_dict3  
     
 
