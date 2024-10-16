@@ -3,6 +3,7 @@ import tkinter as tk
 from display_start import DisplayWindow
 from excel_reader import process_srm_excel_data
 from excel_reader import process_electrolysis_excel_data
+from excel_reader import process_criteria_excel_data
 from C2P_Data_Presentation import C2P_Run
 from technical_comparison import matching_combinations
 
@@ -37,9 +38,9 @@ def compare_two_technologies():
 
 
 def compare_two_projects():
-    vara = process_srm_excel_data()
-    varb = process_electrolysis_excel_data() 
-    print("Function Not Implemented yet")
+    vara = process_criteria_excel_data()
+    
+    print()
     # To be implemented
     pass
 

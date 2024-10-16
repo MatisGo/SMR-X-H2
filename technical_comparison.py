@@ -20,10 +20,12 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
             smr_power_output = float(smr_data.get('Electricity Power Output', 0))
             smr_thermal_output = float(smr_data.get('Thermal Output', 0))
             smr_outlet_coolant = float(smr_data.get('Outlet Coolant', 0))
+
             for elec_index, elec_data in excel_data_electrolysis.items():
                 elec_operating_temp_min = elec_data.get('Operating Temp Min')
                 elec_energy_consumption = float(elec_data.get('System Electricity Cosumption'))
                 elec_heat_consumption = float(elec_data.get('System heat needed'))
+
                 if smr_outlet_coolant >= elec_operating_temp_min and smr_power_output >= 1: 
                     tempdiff=abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
@@ -79,10 +81,11 @@ def maxProductioncalc(smr_power_output,smr_thermal_output,elec_energy_consumptio
         results=[]
         max_prod_thermal = (smr_thermal_output*capacity_Factor*1000)/elec_heat_consumption
         max_prod_elec = (smr_power_output*capacity_Factor*1000)/elec_energy_consumption
+        # Here Reverse Calculation to find out 
         zerovalue = 0 
         if max_prod_thermal > max_prod_elec: 
             results = {
-                '1': max_prod_thermal,
+                '1': max_prod_elec,
                 '2': zerovalue,
                 '3': max_prod_thermal
             }

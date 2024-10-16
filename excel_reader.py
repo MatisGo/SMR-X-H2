@@ -75,21 +75,30 @@ def process_electrolysis_excel_data():#Script to read the electrolysis excel Dat
 #Criteria
 def process_criteria_excel_data():#Script to read the Criteria excel Data 
     try:
-        index2 = 0
-
         # Get the current directory
         current_dir = os.path.dirname(os.path.abspath(__file__))
         criteria_file = os.path.join(current_dir, 'Criteria Ranking.xlsx')
 
 
         # Define Sheet Name 
-        criteria_sheet_name = 'DATA'    # Sheet name Criteria >Need to be changed
+        criteria_sheet_name = 'DATA Percentage'    # Sheet name Criteria 
 
-        xl3 = pd.read_excel(criteria_file, sheet_name=criteria_sheet_name, header=0)
-        
-        
-
-        return
+        xl3 = pd.read_excel(criteria_file, sheet_name=criteria_sheet_name, header=None, nrows=2)
+        # The first row contains the headers
+        headers = xl3.iloc[0, 4:].tolist()
+    
+        # The second row contains the values, starting from the 5th column (index 4)
+        values = xl3.iloc[1, 4:].tolist()
+        #print(values)
+        # Create the main dictionary
+        main_dict3 = {}
+            
+        # Populate the dictionary
+        for header, value in zip(headers, values):
+            if pd.notna(header) and pd.notna(value):  # Check if both header and value are not NaN
+                main_dict3[header] = value
+        print(main_dict3)
+        return main_dict3  
     
 
     except Exception as e:
