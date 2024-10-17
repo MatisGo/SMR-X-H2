@@ -29,7 +29,7 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
                     prodresults = maxProductioncalc(smr_power_output,smr_thermal_output,elec_energy_consumption,elec_heat_consumption)
                     match_info = {
-                        'SMR Technology': smr_data['Project Name'],
+                        'SMR Project': smr_data['Project Name'],
                         'Electrolysis Technology': elec_data['Technology'],
                         'Temperature Difference (°C)':tempdiff, #Absolute value of the temperature difference
                         'Max H2 Production (kg/h)':prodresults['1'],
@@ -40,18 +40,18 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                     matches.append(match_info)
                 if smr_outlet_coolant <= elec_operating_temp_min and smr_power_output == 0:
                     nomatch_info = {
-                        'SMR Technology': smr_data['Project Name'],
+                        'SMR Project': smr_data['Project Name'],
                         'Electrolysis Technology': elec_data['Technology'],
-                        'Reason':'No Electricity Output on this Type of Reactor'
+                        'Reason':'No Electricity Output on this Type of Reactor'# CHECK IF THIS IS WORKING
                     }
-                    no_matches.append(nomatch_info)
+                    no_matches.append(nomatch_info) #No Match is maybe if we want to display the combinations kicked out
                 else :
                     nomatch_info = {
-                        'SMR Technology': smr_data['Project Name'],
+                        'SMR Project': smr_data['Project Name'],
                         'Electrolysis Technology': elec_data['Technology'],
-                        'Reason':'SMR Coolant Temperature is not sufficiant for Electrolyser'
+                        'Reason':'SMR Coolant Temperature is not sufficiant for Electrolyser' # CHECK IF THIS IS WORKING
                     }
-                    no_matches.append(nomatch_info)
+                    no_matches.append(nomatch_info) #No Match is maybe if we want to display the combinations kicked out
 
 
         # Print the matching combinations
