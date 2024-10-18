@@ -24,16 +24,32 @@ def criteria_ranking_function(excel_data_srm,excel_data_electrolysis,combination
                             smr_grade=(float(smr_data.get('Capex'))*float(criteria_weighting.get('Low Capex')))+(float(smr_data.get('Safety'))*float(criteria_weighting.get('Safety')))+(float(smr_data.get('Rentability'))*float(criteria_weighting.get('Rentability')))+(float(smr_data.get('Opex'))*float(criteria_weighting.get('Low Opex')))+(float(smr_data.get('Ecological impact'))*float(criteria_weighting.get('Ecological Impact')))+(float(smr_data.get('Startup time'))*float(criteria_weighting.get('Fast startup time')))+(float(smr_data.get('Scalability'))*float(criteria_weighting.get('Scalability')))+(float(smr_data.get('Availability (h/year)'))*float(criteria_weighting.get('High Availability (h/year)')))+(float(smr_data.get('Plant Area/Footprint'))*float(criteria_weighting.get('Plant Area/Footprint')))+(float(smr_data.get('Technology readiness'))*float(criteria_weighting.get('Technology readiness')))+(float(smr_data.get('Connection flexibility'))*float(criteria_weighting.get('Connection flexibility')))+(float(smr_data.get('Geopolitical barriers'))*float(criteria_weighting.get('Geopolitical barriers')))+(float(smr_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))+(float(smr_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))+(float(smr_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))
                             elec_grade=(float(elec_data.get('Capex'))*float(criteria_weighting.get('Low Capex')))+(float(elec_data.get('Safety'))*float(criteria_weighting.get('Safety')))+(float(elec_data.get('Rentability'))*float(criteria_weighting.get('Rentability')))+(float(elec_data.get('Opex'))*float(criteria_weighting.get('Low Opex')))+(float(elec_data.get('Ecological impact'))*float(criteria_weighting.get('Ecological Impact')))+(float(elec_data.get('Startup time'))*float(criteria_weighting.get('Fast startup time')))+(float(elec_data.get('Scalability'))*float(criteria_weighting.get('Scalability')))+(float(elec_data.get('Availability (h/year)'))*float(criteria_weighting.get('High Availability (h/year)')))+(float(elec_data.get('Plant Area/Footprint'))*float(criteria_weighting.get('Plant Area/Footprint')))+(float(elec_data.get('Technology readiness'))*float(criteria_weighting.get('Technology readiness')))+(float(elec_data.get('Connection flexibility'))*float(criteria_weighting.get('Connection flexibility')))+(float(elec_data.get('Geopolitical barriers'))*float(criteria_weighting.get('Geopolitical barriers')))+(float(elec_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))+(float(elec_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))+(float(elec_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))
                             # A wheighting is needed
-                            final_grade= smr_grade + elec_grade #UPDATE THIS 
+                            final_grade= int(smr_grade) + int(elec_grade) #UPDATE THIS 
                             grade_info ={
                                 'Grade': final_grade
                             }
                             combination.update(grade_info)
-            
-                            print('Grade for',callable_smr)
-                            print(smr_grade)
-                            print(combination)
+                            #print('Grade for',callable_smr)
+                            #print(smr_grade)
+                            #print(combination)
+        
+        #print(combinations) #See combinations 
+        for item in combinations:
+            if not isinstance(item, dict):
+                print(f"Error: {item} is not a dictionary")
+                continue  # Skip invalid items
 
+            # Sort the combinations by 'Grade' in descending order
+        sorted_combinations = sorted(combinations, key=lambda x: x['Grade'], reverse=True)
+
+            # Assign rank based on the sorted order
+        for idx, combo in enumerate(sorted_combinations, start=1):
+            combo['Rank'] = idx
+
+            # Display the ranked combinations
+        for combo in sorted_combinations:
+                
+            print(combo)  #Display the rank 
      
         return combinations
 
