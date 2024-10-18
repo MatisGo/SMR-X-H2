@@ -55,4 +55,3 @@ def criteria_ranking_function(excel_data_srm,excel_data_electrolysis,combination
 
     except Exception as e:
         print(f"Error during criteria ranking: {e}")
-

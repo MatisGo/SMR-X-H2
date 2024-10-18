@@ -23,7 +23,7 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                 elec_operating_temp_min = elec_data.get('Operating Temp Min')
                 elec_energy_consumption = float(elec_data.get('System Electricity Cosumption'))
                 elec_heat_consumption = float(elec_data.get('System heat needed'))
-
+                print('MIAW MIAW MIAW MIAW')
                 if smr_outlet_coolant >= elec_operating_temp_min and smr_power_output >= 1: 
                     tempdiff=abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
@@ -33,8 +33,10 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                         'Electrolysis Technology': elec_data['Technology'],
                         'Temperature Difference (°C)':tempdiff, #Absolute value of the temperature difference
                         'Max H2 Production (kg/h)':prodresults['1'],
-                        'Electricity Loss (KWh)':prodresults['2'],
-                        'Heat Loss (KWh)':prodresults['3'],
+                        'Electricity not used (KWh)':prodresults['2'],
+                        'Heat not used (KWh)':prodresults['3'],
+                        'Unused % of Electricity prod':prodresults['4'],
+                        'Unused % of heat prod ':prodresults['5'],
 
                     }
                     matches.append(match_info)
@@ -74,23 +76,34 @@ def maxProductioncalc(smr_power_output,smr_thermal_output,elec_energy_consumptio
 
     #Capacity Factor measures its ability to generate electricity relative to its maximum potential output
     capacity_Factor= 0.93
+
     try:
         results=[]
         max_prod_thermal = (smr_thermal_output*capacity_Factor*1000)/elec_heat_consumption
         max_prod_elec = (smr_power_output*capacity_Factor*1000)/elec_energy_consumption
+
         # Here Reverse Calculation to find out 
         zerovalue = 0 
         if max_prod_thermal > max_prod_elec: 
+            thermal_losses = (max_prod_thermal-max_prod_elec)/elec_heat_consumption
+            thermal_percentage=(thermal_losses/max_prod_thermal)*100
+            
             results = {
                 '1': max_prod_elec,
                 '2': zerovalue,
-                '3': max_prod_thermal
+                '3': thermal_losses,
+                '4': zerovalue,
+                '5': thermal_percentage
             }
         else :
+            elec_losses = (max_prod_elec-max_prod_thermal)/elec_energy_consumption
+            elec_percentage =(elec_losses/max_prod_elec)*100
             results = {
                 '1': max_prod_thermal,
-                '2': max_prod_elec,
-                '3': zerovalue
+                '2': elec_losses,
+                '3': zerovalue,
+                '4': elec_percentage,
+                '5': zerovalue
             }
         return results 
         
