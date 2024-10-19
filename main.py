@@ -20,14 +20,14 @@ def main():
     root.mainloop()
 
 
-
+#First possibility of the script// Normal mode // Will give out the best option
 def run_complete_comparison():
-    excel_data_srm = process_srm_excel_data()
-    excel_data_electrolysis = process_electrolysis_excel_data()
-    criteria_weighting = process_criteria_excel_data()
-    Combinations = matching_combinations(excel_data_srm,excel_data_electrolysis)
-    #Here maybe insert a small Frontend Recap to see the Data Selected/deleted
-    final_ranking = criteria_ranking_function(excel_data_srm,excel_data_electrolysis,Combinations,criteria_weighting)
+    excel_data_srm = process_srm_excel_data() # Will get the Data from the SRM excel file
+    excel_data_electrolysis = process_electrolysis_excel_data() #Will get the Data from the Electrolysis excel file 
+    criteria_weighting = process_criteria_excel_data() #Will get the data from the criteria weighting excel file
+    Combinations = matching_combinations(excel_data_srm,excel_data_electrolysis) # Create combinations and first technical comparison 
+    # Here maybe insert a small Frontend Recap to see the Data Selected/deleted
+    final_ranking = criteria_ranking_function(excel_data_srm,excel_data_electrolysis,Combinations,criteria_weighting) # Criteria ranking of all the combinations
     # Here Create the Frontend of the results 
 
 
@@ -41,7 +41,7 @@ def compare_two_technologies():
 
 
 
-
+#To be deleted 
 def compare_two_projects():
     vara = process_criteria_excel_data()
     
@@ -52,7 +52,15 @@ def compare_two_projects():
 
 
 def get_h2_output():
+    excel_data_srm = process_srm_excel_data()
+    excel_data_electrolysis = process_electrolysis_excel_data()
+    criteria_weighting = process_criteria_excel_data()
+    Combinations = matching_combinations(excel_data_srm,excel_data_electrolysis)
+    final_ranking = criteria_ranking_function(excel_data_srm,excel_data_electrolysis,Combinations,criteria_weighting)
+
     # To be implemented
+    # Get the desired production Value 
+    # Display the best solution according to the Input and Criteria ranking.
     pass
 
 

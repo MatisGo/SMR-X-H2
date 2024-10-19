@@ -13,6 +13,7 @@ import subprocess
 import sys
 import os
 
+#Just the start of the script // will lauch main 
 def start_application():
     try:
         # Get the directory where startup.py is located
@@ -21,7 +22,7 @@ def start_application():
         
         # Start the main application
         subprocess.run([sys.executable, main_script])
-    except Exception as e:
+    except Exception as e: 
         print(f"Error starting application: {e}")
 
 if __name__ == "__main__":
