@@ -18,25 +18,28 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
             smr_power_output = float(smr_data.get('Electricity Power Output', 0))
             smr_thermal_output = float(smr_data.get('Thermal Output', 0))
             smr_outlet_coolant = float(smr_data.get('Outlet Coolant', 0))
-
             for elec_index, elec_data in excel_data_electrolysis.items():
                 elec_operating_temp_min = elec_data.get('Operating Temp Min')
                 elec_energy_consumption = float(elec_data.get('System Electricity Cosumption'))
                 elec_heat_consumption = float(elec_data.get('System heat needed'))
-                if smr_outlet_coolant >= elec_operating_temp_min and smr_power_output >= 1: 
+                elec_technology = elec_data.get('Technology')
+                if elec_technology != 'SOEC' and smr_power_output >= 1 or elec_technology == 'SOEC' and smr_power_output >= 1 and smr_thermal_output >= elec_operating_temp_min: 
+                    print(elec_technology)
                     tempdiff=abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
-                    prodresults = maxProductioncalc(smr_power_output,smr_thermal_output,elec_energy_consumption,elec_heat_consumption)
+                    if elec_technology == 'SOEC':
+                        factorSOEC= 0.8 # 20% of the heat is needed to heat up the stack and the Water. The production of energy is therefore multiply by 0.8
+                        prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factorSOEC)
+                    else :
+                        factor= 0.1 #For Alk and PEM no extra heat is needed appart from the heat waste heat after the electricity production turbine 
+                        prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factor)
+                    
                     match_info = {
                         'SMR Project': smr_data['Project Name'],
                         'Electrolysis Technology': elec_data['Technology'],
                         'Temperature Difference (°C)':tempdiff, #Absolute value of the temperature difference
                         'Max H2 Production (kg/h)':prodresults['1'],
-                        'Electricity not used (KWh)':prodresults['2'],
-                        'Heat not used (KWh)':prodresults['3'],
-                        'Unused % of Electricity prod':prodresults['4'],
-                        'Unused % of heat prod ':prodresults['5'],
-
+                        'Efficiency':prodresults['2'],
                     }
                     matches.append(match_info)
                 if smr_outlet_coolant <= elec_operating_temp_min and smr_power_output == 0:
@@ -67,43 +70,27 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
         print(f"Error during technical comparison: {e}")
 
 
-def maxProductioncalc(smr_power_output,smr_thermal_output,elec_energy_consumption,elec_heat_consumption):
+def maxProductioncalc(smr_power_output,elec_energy_consumption,factor):
     #SMR Power Output in MW
-    #SMR Thermal Output in MW
     #Electrolyser Electricity consumption in KWh => To produce 1 Kg Hydrogen
-    #Electrolyser thermal consumption in KWh => To Produce 1 Kg Hydrogen
 
     #Capacity Factor measures its ability to generate electricity relative to its maximum potential output
     capacity_Factor= 0.93
 
     try:
         results=[]
-        max_prod_thermal = (smr_thermal_output*capacity_Factor*1000)/elec_heat_consumption
-        max_prod_elec = (smr_power_output*capacity_Factor*1000)/elec_energy_consumption
 
-        # Here Reverse Calculation to find out 
-        zerovalue = 0 
-        if max_prod_thermal > max_prod_elec: 
-            thermal_losses = (max_prod_thermal-max_prod_elec)/elec_heat_consumption
-            thermal_percentage=(thermal_losses/max_prod_thermal)*100
-            
-            results = {
-                '1': max_prod_elec,
-                '2': zerovalue,
-                '3': thermal_losses,
-                '4': zerovalue,
-                '5': thermal_percentage
-            }
-        else :
-            elec_losses = (max_prod_elec-max_prod_thermal)/elec_energy_consumption
-            elec_percentage =(elec_losses/max_prod_elec)*100
-            results = {
-                '1': max_prod_thermal,
-                '2': elec_losses,
-                '3': zerovalue,
-                '4': elec_percentage,
-                '5': zerovalue
-            }
+        max_prod_elec = (smr_power_output*factor*capacity_Factor*1000)/elec_energy_consumption
+
+        # factor changes regarding the technology. For Alk end PEM no Factor.
+        # For SOEC 0.8% Factor is introduce because 20% of energy is used to heat up the Electrolysis Water/Stack  
+
+        #Efficiency calculation??
+        results = {
+            '1': max_prod_elec,
+            '2': 'Not calculated',
+        }
+
         return results 
         
     except Exception as e:
