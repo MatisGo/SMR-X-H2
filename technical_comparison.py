@@ -28,7 +28,7 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                     tempdiff=abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
                     if elec_technology == 'SOEC':
-                        factorSOEC= 0.8 # 20% of the heat is needed to heat up the stack and the Water. The production of energy is therefore multiply by 0.8
+                        factorSOEC= 0.93 # 7% of the heat is needed to heat up the stack and the Water. The production of energy is therefore multiply by 0.97
                         prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factorSOEC)
                     else :
                         factor= 0.1 #For Alk and PEM no extra heat is needed appart from the heat waste heat after the electricity production turbine 
@@ -83,7 +83,7 @@ def maxProductioncalc(smr_power_output,elec_energy_consumption,factor):
         max_prod_elec = (smr_power_output*factor*capacity_Factor*1000)/elec_energy_consumption
 
         # factor changes regarding the technology. For Alk end PEM no Factor.
-        # For SOEC 0.8% Factor is introduce because 20% of energy is used to heat up the Electrolysis Water/Stack  
+        # For SOEC 0.93% Factor is introduce because 7% of energy is used to heat up the Electrolysis Water/Stack  
 
         #Efficiency calculation??
         results = {
