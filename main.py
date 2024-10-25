@@ -1,69 +1,110 @@
-# main.py
-import tkinter as tk
+import customtkinter as ctk
 from display_start import DisplayWindow
-from excel_reader import process_srm_excel_data
-from excel_reader import process_electrolysis_excel_data
-from excel_reader import process_criteria_excel_data
-from C2P_Data_Presentation import C2P_Run
+from excel_reader import (
+    process_srm_excel_data,
+    process_electrolysis_excel_data,
+    process_criteria_excel_data
+)
 from technical_comparison import matching_combinations
 from criteria_function import criteria_ranking_function
+from C2P_Display import TechnologyComparisonWindow  # Updated import name
 
+class MainApplication:
+    def __init__(self):
+        # Initialize root window with CustomTkinter
+        self.root = ctk.CTk()
+        
+        # Pre-load data to avoid repeated loading
+        self.data_elec = process_electrolysis_excel_data()
+        self.data_srm = process_srm_excel_data()
+        self.criteria_weighting = process_criteria_excel_data()
+        
+        # Create callback dictionary
+        callbacks = {
+            'complete_comparison': self.run_complete_comparison,
+            'two_technologies': self.compare_two_technologies,
+            'h2_output': self.get_h2_output
+        }
+        
+        # Initialize main window with callbacks
+        self.main_window = DisplayWindow(self.root, callbacks)
+
+    def run_complete_comparison(self):
+        """First possibility of the script// Normal mode // Will give out the best option"""
+        # Create combinations and first technical comparison
+        combinations = matching_combinations(
+            self.data_srm,
+            self.data_elec
+        )
+        
+        # TODO: Insert frontend recap of selected/deleted data
+        
+        # Criteria ranking of all combinations
+        final_ranking = criteria_ranking_function(
+            self.data_srm,
+            self.data_elec,
+            combinations,
+            self.criteria_weighting
+        )
+        
+        # TODO: Create frontend for results display
+        self.show_complete_comparison_results(final_ranking)
+
+    def compare_two_technologies(self):
+        """Compare two technologies with modern UI"""
+        # Create new window for technology comparison
+        comparison_window = TechnologyComparisonWindow(self.data_elec)
+        
+        # Make window modal (optional)
+        comparison_window.window.transient(self.root)
+        comparison_window.window.grab_set()
+
+    def get_h2_output(self):
+        """Analyze H2 output with specified criteria"""
+        # First get the technical combinations
+        combinations = matching_combinations(
+            self.data_srm,
+            self.data_elec
+        )
+        
+        # Get the ranking based on criteria
+        final_ranking = criteria_ranking_function(
+            self.data_srm,
+            self.data_elec,
+            combinations,
+            self.criteria_weighting
+        )
+        
+        # TODO: Implement H2 output analysis window
+        self.show_h2_output_window(final_ranking)
+
+    def show_complete_comparison_results(self, final_ranking):
+        """Display complete comparison results in a new window"""
+        # TODO: Implement results display window
+        results_window = ctk.CTkToplevel(self.root)
+        results_window.title("Complete Comparison Results")
+        results_window.geometry("900x700")
+        
+        # Add your results display implementation here
+        pass
+
+    def show_h2_output_window(self, final_ranking):
+        """Display H2 output analysis in a new window"""
+        # TODO: Implement H2 output window
+        h2_window = ctk.CTkToplevel(self.root)
+        h2_window.title("H2 Output Analysis")
+        h2_window.geometry("900x700")
+        
+        # Add your H2 output analysis implementation here
+        pass
+
+    def run(self):
+        """Start the application"""
+        self.root.mainloop()
 
 def main():
-    root = tk.Tk()
-    app = DisplayWindow(root, callbacks={
-        'complete_comparison': run_complete_comparison,
-        'two_technologies': compare_two_technologies,
-        'two_projects': compare_two_projects,
-        'h2_output': get_h2_output
-    })
-    root.mainloop()
-
-
-#First possibility of the script// Normal mode // Will give out the best option
-def run_complete_comparison():
-    excel_data_srm = process_srm_excel_data() # Will get the Data from the SRM excel file
-    excel_data_electrolysis = process_electrolysis_excel_data() #Will get the Data from the Electrolysis excel file 
-    criteria_weighting = process_criteria_excel_data() #Will get the data from the criteria weighting excel file
-    Combinations = matching_combinations(excel_data_srm,excel_data_electrolysis) # Create combinations and first technical comparison 
-    # Here maybe insert a small Frontend Recap to see the Data Selected/deleted
-    final_ranking = criteria_ranking_function(excel_data_srm,excel_data_electrolysis,Combinations,criteria_weighting) # Criteria ranking of all the combinations
-    # Here Create the Frontend of the results 
-
-
-
-
-def compare_two_technologies():
-    #Being Implemented
-    data_elec= process_electrolysis_excel_data()
-    #excel_data_srm = process_srm_excel_data()
-    C2P_Run(data_elec)
-
-
-
-#To be deleted 
-def compare_two_projects():
-    vara = process_criteria_excel_data()
-    
-    print()
-    # To be implemented
-    pass
-
-
-
-def get_h2_output():
-    excel_data_srm = process_srm_excel_data()
-    excel_data_electrolysis = process_electrolysis_excel_data()
-    criteria_weighting = process_criteria_excel_data()
-    Combinations = matching_combinations(excel_data_srm,excel_data_electrolysis)
-    final_ranking = criteria_ranking_function(excel_data_srm,excel_data_electrolysis,Combinations,criteria_weighting)
-
-    # To be implemented
-    # Get the desired production Value 
-    # Display the best solution according to the Input and Criteria ranking.
-    pass
-
-
+    app = MainApplication()
+    app.run()
 
 if __name__ == "__main__":
     main()
