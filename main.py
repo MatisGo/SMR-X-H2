@@ -7,13 +7,15 @@ from excel_reader import (
 )
 from technical_comparison import matching_combinations
 from criteria_function import criteria_ranking_function
-from C2P_Display import TechnologyComparisonWindow  
+from C2P_display import TechnologyComparisonWindow  
 from results_display import ResultsDisplayWindow
 
 class MainApplication:
     def __init__(self):
         # Initialize root window with CustomTkinter
         self.root = ctk.CTk()
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("blue")
         
         # Pre-load data to avoid repeated loading
         self.data_elec = process_electrolysis_excel_data()

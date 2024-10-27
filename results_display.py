@@ -13,8 +13,11 @@ class ResultsDisplayWindow:
         # Create the window
         self.window = ctk.CTkToplevel(parent)
         self.window.title("Top 3 Combinations")
-        self.window.geometry("1000x800")
-        
+        width= self.window.winfo_screenwidth()
+        height= self.window.winfo_screenheight()
+        #setting tkinter window size
+        self.window.geometry("%dx%d" % (width, height))
+
         # Bind the closing event
         self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
         

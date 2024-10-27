@@ -24,7 +24,7 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                 elec_heat_consumption = float(elec_data.get('System heat needed'))
                 elec_technology = elec_data.get('Technology')
                 if elec_technology != 'SOEC' and smr_power_output >= 1 or elec_technology == 'SOEC' and smr_power_output >= 1 and smr_thermal_output >= elec_operating_temp_min: 
-                    print(elec_technology)
+                    #print(elec_technology)
                     tempdiff=abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
                     if elec_technology == 'SOEC':
@@ -35,11 +35,13 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                         prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factor)
                     
                     match_info = {
+                        'Name':smr_data['Project Name']+' X '+ elec_data['Technology'],
                         'SMR Project': smr_data['Project Name'],
                         'Electrolysis Technology': elec_data['Technology'],
                         'Temperature Difference (°C)':tempdiff, #Absolute value of the temperature difference
                         'Max H2 Production (kg/h)':prodresults['1'],
                         'Efficiency':prodresults['2'],
+                        #'Tempertaure Output':smr_data['Temperature Output'],
                     }
                     matches.append(match_info)
                 if smr_outlet_coolant <= elec_operating_temp_min and smr_power_output == 0:

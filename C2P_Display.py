@@ -5,11 +5,23 @@ from typing import Dict, List
 
 class TechnologyComparisonWindow:
     def __init__(self, data_elec):
+
         # Create new window
         self.window = ctk.CTkToplevel()
         self.window.title("Technology Comparison")
-        self.window.geometry("1000x800")
-        
+        #self.window.geometry("1000x800")
+        #self.window = ctk.CTk()
+        width= self.window.winfo_screenwidth()
+        height= self.window.winfo_screenheight()
+        #setting tkinter window size
+        self.window.geometry("%dx%d" % (width, height))
+
+
+
+        # Bind the closing event
+        self.window.protocol("WM_DELETE_WINDOW", self.close_window)
+
+
         # Bring window to front and focus
         self.window.lift()  # Brings window to front
         self.window.focus_force()  # Forces focus on the window
@@ -28,7 +40,7 @@ class TechnologyComparisonWindow:
         self.selection_frame.pack(expand=True, fill="both", padx=10, pady=10)
         
         # Create results frame
-        self.comparison_frame = ctk.CTkFrame(self.main_frame)
+        self.comparison_frame = ctk.CTkScrollableFrame(self.main_frame)
         
         # Create sections
         self.create_header()
@@ -284,6 +296,7 @@ class TechnologyComparisonWindow:
         
         # Show selection frame
         self.selection_frame.pack(expand=True, fill="both", padx=10, pady=10)
+
 
     def close_window(self):
         self.window.destroy()

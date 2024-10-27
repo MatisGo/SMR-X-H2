@@ -27,6 +27,7 @@ def criteria_ranking_function(excel_data_srm,excel_data_electrolysis,combination
                             final_grade= int(smr_grade) + int(elec_grade) #UPDATE THIS IF FACTOR IS NEEDED
                             grade_info ={
                                 'Grade': final_grade
+                                
                             }
                             combination.update(grade_info)
                             #print('Grade for',callable_smr)
