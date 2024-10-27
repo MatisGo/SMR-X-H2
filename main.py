@@ -7,7 +7,8 @@ from excel_reader import (
 )
 from technical_comparison import matching_combinations
 from criteria_function import criteria_ranking_function
-from C2P_Display import TechnologyComparisonWindow  # Updated import name
+from C2P_Display import TechnologyComparisonWindow  
+from results_display import ResultsDisplayWindow
 
 class MainApplication:
     def __init__(self):
@@ -37,8 +38,6 @@ class MainApplication:
             self.data_elec
         )
         
-        # TODO: Insert frontend recap of selected/deleted data
-        
         # Criteria ranking of all combinations
         final_ranking = criteria_ranking_function(
             self.data_srm,
@@ -47,8 +46,12 @@ class MainApplication:
             self.criteria_weighting
         )
         
-        # TODO: Create frontend for results display
+        # Display the results
         self.show_complete_comparison_results(final_ranking)
+
+    def show_complete_comparison_results(self, final_ranking):
+        """Display complete comparison results in a new window"""
+        ResultsDisplayWindow(self.root, final_ranking)
 
     def compare_two_technologies(self):
         """Compare two technologies with modern UI"""
@@ -75,28 +78,17 @@ class MainApplication:
             self.criteria_weighting
         )
         
-        # TODO: Implement H2 output analysis window
+        # Show H2 output window
         self.show_h2_output_window(final_ranking)
-
-    def show_complete_comparison_results(self, final_ranking):
-        """Display complete comparison results in a new window"""
-        # TODO: Implement results display window
-        results_window = ctk.CTkToplevel(self.root)
-        results_window.title("Complete Comparison Results")
-        results_window.geometry("900x700")
-        
-        # Add your results display implementation here
-        pass
 
     def show_h2_output_window(self, final_ranking):
         """Display H2 output analysis in a new window"""
-        # TODO: Implement H2 output window
         h2_window = ctk.CTkToplevel(self.root)
         h2_window.title("H2 Output Analysis")
         h2_window.geometry("900x700")
         
         # Add your H2 output analysis implementation here
-        pass
+        # TODO: Implement H2 output display
 
     def run(self):
         """Start the application"""
