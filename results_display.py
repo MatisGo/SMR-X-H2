@@ -47,7 +47,7 @@ class ResultsDisplayWindow:
         self.scrollable_frame.pack(fill="both", expand=True, padx=10, pady=5)
         
         # Sort final_ranking by Rank and get top 3
-        sorted_ranking = sorted(final_ranking, key=lambda x: x['Rank'], reverse=True)
+        sorted_ranking = sorted(final_ranking, key=lambda x: x['Rank'], reverse=False)
         top_three = sorted_ranking[:3]
         
         # Create frames for top 3 combinations
@@ -94,7 +94,7 @@ class ResultsDisplayWindow:
             self.add_detail_row(details_frame, 2, "Temperature Difference:", f"{combo['Temperature Difference (°C)']:.2f} °C")
             self.add_detail_row(details_frame, 3, "Max H₂ Production:", f"{combo['Max H2 Production (kg/h)']:.2f} kg/h")
             self.add_detail_row(details_frame, 4, "Efficiency:", str(combo['Efficiency']))
-            self.add_detail_row(details_frame, 5, "Grade:", f"{combo['Grade']}/100")
+            self.add_detail_row(details_frame, 5, "Grade:", f"{combo['Grade']}")
 
     def add_detail_row(self, parent, row: int, label_text: str, value_text: str):
         """Add a row of details with label and value"""
