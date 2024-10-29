@@ -4,10 +4,16 @@ import pandas as pd
 from typing import Dict, List
 
 class TechnologyComparisonWindow:
-    def __init__(self, data_elec):
+    def __init__(self, parent, data_elec):
+
+        # Store parent reference
+        self.parent = parent
+        
+        # Hide parent window
+        self.parent.withdraw()
 
         # Create new window
-        self.window = ctk.CTkToplevel()
+        self.window = ctk.CTkToplevel(parent)
         self.window.title("Technology Comparison")
         #self.window.geometry("1000x800")
         #self.window = ctk.CTk()
@@ -33,7 +39,7 @@ class TechnologyComparisonWindow:
         
         # Create main container
         self.main_frame = ctk.CTkFrame(self.window)
-        self.main_frame.pack(expand=True, fill="both", padx=20, pady=20)
+        self.main_frame.pack(expand=True, fill="both", padx=0, pady=0)
         
         # Create selection frame (will hold technology and measures selection)
         self.selection_frame = ctk.CTkFrame(self.main_frame)
@@ -43,17 +49,17 @@ class TechnologyComparisonWindow:
         self.comparison_frame = ctk.CTkScrollableFrame(self.main_frame)
         
         # Create sections
-        self.create_header()
+        #self.create_header()
         self.create_selection_view()
         
     def create_header(self):
         # Header frame
-        header_frame = ctk.CTkFrame(self.window, fg_color="transparent")
-        header_frame.pack(fill="x", padx=20, pady=10)
+        self.header_frame = ctk.CTkFrame(self.window, fg_color="transparent")
+        self.header_frame.pack(fill="x", padx=20, pady=10)
         
         # Title
         title = ctk.CTkLabel(
-            header_frame,
+            self.header_frame,
             text="Technology Coupling Comparison",
             font=ctk.CTkFont(size=28, weight="bold")
         )
@@ -61,7 +67,7 @@ class TechnologyComparisonWindow:
         
         # Description
         description = ctk.CTkLabel(
-            header_frame,
+            self.header_frame,
             text="Compare different technologies and their coupling characteristics",
             font=ctk.CTkFont(size=14),
             text_color="gray70"
@@ -69,7 +75,7 @@ class TechnologyComparisonWindow:
         description.pack()
         
         # Navigation buttons frame
-        nav_frame = ctk.CTkFrame(header_frame, fg_color="transparent")
+        nav_frame = ctk.CTkFrame(self.header_frame, fg_color="transparent")
         nav_frame.pack(fill="x", pady=10)
         
         # Return button (hidden initially)
@@ -131,23 +137,23 @@ class TechnologyComparisonWindow:
         
         # Technology listbox
         self.tech_listbox = ctk.CTkScrollableFrame(tech_frame, height=100)
-        self.tech_listbox.pack(fill="x", padx=20, pady=5)
+        self.tech_listbox.pack(fill="x", padx=10, pady=5)
         
         # Measures frame
-        measures_frame = ctk.CTkFrame(self.selection_frame)
-        measures_frame.pack(fill="x", padx=10, pady=10)
+        self.measures_frame = ctk.CTkFrame(self.selection_frame)
+        self.measures_frame.pack(fill="x", padx=10, pady=5)
         
         # Measures label
         measures_label = ctk.CTkLabel(
-            measures_frame,
+            self.measures_frame,
             text="Select Measures to Compare:",
             font=ctk.CTkFont(size=16, weight="bold")
         )
         measures_label.pack(pady=(10, 5))
         
         # Measures scrollable frame
-        self.measures_scroll = ctk.CTkScrollableFrame(measures_frame, height=150)
-        self.measures_scroll.pack(fill="x", padx=20, pady=5)
+        self.measures_scroll = ctk.CTkScrollableFrame(self.measures_frame, height=100)
+        self.measures_scroll.pack(fill="x", padx=10, pady=5)
         
         # Compare button
         self.compare_button = ctk.CTkButton(
@@ -157,7 +163,7 @@ class TechnologyComparisonWindow:
             height=40,
             font=ctk.CTkFont(size=15, weight="bold")
         )
-        self.compare_button.pack(pady=15)
+        self.compare_button.pack()
         
         # Initialize lists
         self.update_technology_list()
@@ -238,6 +244,7 @@ class TechnologyComparisonWindow:
         # Hide selection frame and show comparison
         self.selection_frame.pack_forget()
         self.create_comparison_view(selected_techs, selected_measures)
+        self.create_header()
         
         # Show return button
         self.return_button.pack(side="left", padx=5)
@@ -292,11 +299,12 @@ class TechnologyComparisonWindow:
     def return_to_selection(self):
         # Hide comparison frame and return button
         self.comparison_frame.pack_forget()
-        self.return_button.pack_forget()
+        self.header_frame.pack_forget()
         
         # Show selection frame
         self.selection_frame.pack(expand=True, fill="both", padx=10, pady=10)
 
 
     def close_window(self):
+        self.parent.deiconify()
         self.window.destroy()

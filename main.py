@@ -58,11 +58,11 @@ class MainApplication:
     def compare_two_technologies(self):
         """Compare two technologies with modern UI"""
         # Create new window for technology comparison
-        comparison_window = TechnologyComparisonWindow(self.data_elec)
+        TechnologyComparisonWindow(self.root, self.data_elec)
         
         # Make window modal (optional)
-        comparison_window.window.transient(self.root)
-        comparison_window.window.grab_set()
+        #comparison_window.window.transient(self.root)
+        #comparison_window.window.grab_set()
 
     def get_h2_output(self):
         """Analyze H2 output with specified criteria"""
