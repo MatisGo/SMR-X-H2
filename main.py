@@ -47,7 +47,7 @@ class MainApplication:
             combinations,
             self.criteria_weighting
         )
-        
+        print(final_ranking)
         # Display the results
         self.show_complete_comparison_results(final_ranking)
 

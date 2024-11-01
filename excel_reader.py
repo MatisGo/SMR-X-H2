@@ -85,10 +85,10 @@ def process_criteria_excel_data():#Script to read the Criteria excel Data
 
         xl3 = pd.read_excel(criteria_file, sheet_name=criteria_sheet_name, header=None, nrows=2)
         # The first row contains the headers
-        headers = xl3.iloc[0, 4:].tolist()
+        headers = xl3.iloc[0, 1:].tolist()
     
         # The second row contains the values, starting from the 5th column (index 4)
-        values = xl3.iloc[1, 4:].tolist()
+        values = xl3.iloc[1, 1:].tolist()
         #print(values)
         # Create the main dictionary
         main_dict3 = {}
@@ -97,6 +97,7 @@ def process_criteria_excel_data():#Script to read the Criteria excel Data
         for header, value in zip(headers, values):
             if pd.notna(header) and pd.notna(value):  # Check if both header and value are not NaN
                 main_dict3[header] = value
+
         return main_dict3  
     
 

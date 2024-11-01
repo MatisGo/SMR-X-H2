@@ -50,6 +50,7 @@ class ResultsDisplayWindow:
         self.scrollable_frame.pack(fill="both", expand=True, padx=10, pady=5)
         
         # Sort final_ranking by Rank and get top 3
+        #print(final_ranking)
         sorted_ranking = sorted(final_ranking, key=lambda x: x['Rank'], reverse=False)
         top_three = sorted_ranking[:3]
         
