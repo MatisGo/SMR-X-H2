@@ -28,11 +28,11 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                     tempdiff=abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
                     if elec_technology == 'SOEC':
-                        factorSOEC= 0.93 # 7% of the heat is needed to heat up the stack and the Water. The production of energy is therefore multiply by 0.97
-                        prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factorSOEC)
+                        #factorSOEC= 0.93 # 7% of the heat is needed to heat up the stack and the Water. The production of energy is therefore multiply by 0.97
+                        prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factor=0.93)
                     else :
-                        factor= 0.1 #For Alk and PEM no extra heat is needed appart from the heat waste heat after the electricity production turbine 
-                        prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factor)
+                         #For Alk and PEM no extra heat is needed appart from the heat waste heat after the electricity production turbine 
+                        prodresults = maxProductioncalc(smr_power_output,elec_energy_consumption,factor=1)
                     
                     match_info = {
                         'Name':smr_data['Project Name']+' X '+ elec_data['Technology'],
