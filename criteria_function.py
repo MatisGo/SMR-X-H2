@@ -46,10 +46,11 @@ def criteria_ranking_function(excel_data_srm,excel_data_electrolysis,combination
             combo['Rank'] = idx
 
             # Display the ranked combinations
+        '''
         for combo in sorted_combinations:
                 
             print(combo)  #Display the rank 
-     
+        '''
         return combinations
 
     except Exception as e:

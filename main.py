@@ -47,7 +47,6 @@ class MainApplication:
             combinations,
             self.criteria_weighting
         )
-        print(final_ranking)
         # Display the results
         self.show_complete_comparison_results(final_ranking)
 
@@ -56,13 +55,10 @@ class MainApplication:
         ResultsDisplayWindow(self.root, final_ranking)
 
     def compare_two_technologies(self):
-        """Compare two technologies with modern UI"""
+        """Compare two technologies """
         # Create new window for technology comparison
         TechnologyComparisonWindow(self.root, self.data_elec)
         
-        # Make window modal (optional)
-        #comparison_window.window.transient(self.root)
-        #comparison_window.window.grab_set()
 
     def get_h2_output(self):
         """Analyze H2 output with specified criteria"""

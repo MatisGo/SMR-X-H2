@@ -8,8 +8,6 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
         print("No data available for comparison")
         quit()
         return
-    #print (excel_data_srm)
-    #print (excel_data_electrolysis)
     try:
     # Function to compare SMR and Electrolysis values
         matches = []   # List to store match
@@ -25,7 +23,9 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                 elec_technology = elec_data.get('Technology')
                 if elec_technology != 'SOEC' and smr_power_output >= 1 or elec_technology == 'SOEC' and smr_power_output >= 1 and smr_thermal_output >= elec_operating_temp_min: 
                     #print(elec_technology)
-                    tempdiff=abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
+                    tempdiff = abs(smr_outlet_coolant-elec_operating_temp_min) #The Temperature Difference value is absolute, the SMR temperature is higher than electrolyser need
+                    production_efficiency = (smr_data['Thermal efficiency'] * (elec_data['Efficiency (LHV)']/100))*100 # ηPRODUCTION = ηth x ηELECTROLYZER
+                    
                     prodresults=[]  # The results of the Calculation of Max H2 will be stored there 
                     if elec_technology == 'SOEC':
                         #factorSOEC= 0.93 # 7% of the heat is needed to heat up the stack and the Water. The production of energy is therefore multiply by 0.97
@@ -38,9 +38,10 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                         'Name':smr_data['Project Name']+' X '+ elec_data['Technology'],
                         'SMR Project': smr_data['Project Name'],
                         'Electrolysis Technology': elec_data['Technology'],
-                        'Temperature Difference (°C)':tempdiff, #Absolute value of the temperature difference
-                        'Max H2 Production (kg/h)':prodresults['1'],
-                        'Efficiency':prodresults['2'],
+                        'Temperature Difference (°C)': tempdiff, #Absolute value of the temperature difference
+                        'Max H2 Production (kg/h)': prodresults['1'],
+                        'SMR Thermal efficiency (%)': smr_data['Thermal efficiency'],
+                        'Production Efficiency (%)': production_efficiency,
                         #'Tempertaure Output':smr_data['Temperature Output'],
                     }
                     matches.append(match_info)

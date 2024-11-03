@@ -89,7 +89,6 @@ def process_criteria_excel_data():#Script to read the Criteria excel Data
     
         # The second row contains the values, starting from the 5th column (index 4)
         values = xl3.iloc[1, 1:].tolist()
-        #print(values)
         # Create the main dictionary
         main_dict3 = {}
             
