@@ -18,19 +18,46 @@ def criteria_ranking_function(excel_data_srm,excel_data_electrolysis,combination
                         callable_elec= elec_data.get('Technology')
                         if electrolysis_tech == callable_elec:
                             #Here we have the correct values to start the Calculation of the Grade
-                            #First SMR Values
-                            smr_grade=(float(smr_data.get('Capex'))*float(criteria_weighting.get('Low Capex')))+(float(smr_data.get('Safety'))*float(criteria_weighting.get('Safety')))+(float(smr_data.get('Rentability'))*float(criteria_weighting.get('Rentability')))+(float(smr_data.get('Opex'))*float(criteria_weighting.get('Low Opex')))+(float(smr_data.get('Ecological impact'))*float(criteria_weighting.get('Ecological Impact')))+(float(smr_data.get('Startup time'))*float(criteria_weighting.get('Fast startup time')))+(float(smr_data.get('Scalability'))*float(criteria_weighting.get('Scalability')))+(float(smr_data.get('Availability (h/year)'))*float(criteria_weighting.get('High Availability (h/year)')))+(float(smr_data.get('Plant Area/Footprint'))*float(criteria_weighting.get('Plant Area/Footprint')))+(float(smr_data.get('Technology readiness'))*float(criteria_weighting.get('Technology readiness')))+(float(smr_data.get('Connection flexibility'))*float(criteria_weighting.get('Connection flexibility')))+(float(smr_data.get('Geopolitical barriers'))*float(criteria_weighting.get('Geopolitical barriers')))+(float(smr_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))+(float(smr_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))+(float(smr_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))
-                            elec_grade=(float(elec_data.get('Capex'))*float(criteria_weighting.get('Low Capex')))+(float(elec_data.get('Safety'))*float(criteria_weighting.get('Safety')))+(float(elec_data.get('Rentability'))*float(criteria_weighting.get('Rentability')))+(float(elec_data.get('Opex'))*float(criteria_weighting.get('Low Opex')))+(float(elec_data.get('Ecological impact'))*float(criteria_weighting.get('Ecological Impact')))+(float(elec_data.get('Startup time'))*float(criteria_weighting.get('Fast startup time')))+(float(elec_data.get('Scalability'))*float(criteria_weighting.get('Scalability')))+(float(elec_data.get('Availability (h/year)'))*float(criteria_weighting.get('High Availability (h/year)')))+(float(elec_data.get('Plant Area/Footprint'))*float(criteria_weighting.get('Plant Area/Footprint')))+(float(elec_data.get('Technology readiness'))*float(criteria_weighting.get('Technology readiness')))+(float(elec_data.get('Connection flexibility'))*float(criteria_weighting.get('Connection flexibility')))+(float(elec_data.get('Geopolitical barriers'))*float(criteria_weighting.get('Geopolitical barriers')))+(float(elec_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))+(float(elec_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))+(float(elec_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))
-                            # A wheighting is needed
-                            final_grade= int(smr_grade) + int(elec_grade) #UPDATE THIS IF FACTOR IS NEEDED
+                            #UPDATE THIS IF FACTOR IS NEEDED
+                            cCapex=float(smr_data.get('Capex'))*float(criteria_weighting.get('Low Capex'))+float(elec_data.get('Capex'))*float(criteria_weighting.get('Low Capex'))
+                            cSafety=(float(smr_data.get('Safety'))*float(criteria_weighting.get('Safety')))+(float(elec_data.get('Safety'))*float(criteria_weighting.get('Safety')))
+                            cRentabilité=(float(smr_data.get('Rentability'))*float(criteria_weighting.get('Rentability')))+(float(elec_data.get('Rentability'))*float(criteria_weighting.get('Rentability')))
+                            cOpex=(float(smr_data.get('Opex'))*float(criteria_weighting.get('Low Opex')))+(float(elec_data.get('Opex'))*float(criteria_weighting.get('Low Opex')))
+                            cEcological=(float(smr_data.get('Ecological impact'))*float(criteria_weighting.get('Ecological Impact')))+(float(elec_data.get('Ecological impact'))*float(criteria_weighting.get('Ecological Impact')))
+                            cStartup=(float(smr_data.get('Startup time'))*float(criteria_weighting.get('Fast startup time')))+(float(elec_data.get('Startup time'))*float(criteria_weighting.get('Fast startup time')))
+                            cScalability=(float(smr_data.get('Scalability'))*float(criteria_weighting.get('Scalability')))+(float(elec_data.get('Scalability'))*float(criteria_weighting.get('Scalability')))
+                            cAvailability=(float(smr_data.get('Availability (h/year)'))*float(criteria_weighting.get('High Availability (h/year)')))+(float(elec_data.get('Availability (h/year)'))*float(criteria_weighting.get('High Availability (h/year)')))
+                            cPlantArea=(float(smr_data.get('Plant Area/Footprint'))*float(criteria_weighting.get('Plant Area/Footprint')))+(float(elec_data.get('Plant Area/Footprint'))*float(criteria_weighting.get('Plant Area/Footprint')))
+                            cTechnology=(float(smr_data.get('Technology readiness'))*float(criteria_weighting.get('Technology readiness')))+(float(elec_data.get('Technology readiness'))*float(criteria_weighting.get('Technology readiness')))
+                            cFlexibility=(float(smr_data.get('Connection flexibility'))*float(criteria_weighting.get('Connection flexibility')))+(float(elec_data.get('Connection flexibility'))*float(criteria_weighting.get('Connection flexibility')))
+                            cGeopolitical=(float(smr_data.get('Geopolitical barriers'))*float(criteria_weighting.get('Geopolitical barriers')))+(float(elec_data.get('Geopolitical barriers'))*float(criteria_weighting.get('Geopolitical barriers')))
+                            cLifetime=(float(smr_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))+(float(elec_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))
+                            cEfficiency=(float(smr_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))+(float(elec_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))
+                            cWaste=(float(smr_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))+(float(elec_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))
+
+
+                            
+                            final_grade= cCapex + cSafety + cRentabilité +cOpex + cEcological + cStartup + cScalability + cAvailability + cPlantArea + cTechnology + cFlexibility + cGeopolitical + cLifetime + cEfficiency + cWaste
                             grade_info ={
-                                'Grade': final_grade
-                                
+                                'Grade': int(final_grade),
+                                'Capex': cCapex,
+                                'Safety': cSafety,
+                                'Rentability': cRentabilité,
+                                'Opex': cOpex,
+                                'Ecological Impact': cEcological,
+                                'Startup time' : cStartup,
+                                'Scalability' : cScalability,
+                                'Availability' : cAvailability,
+                                'Plant Area/Footprint' : cPlantArea,
+                                'Technology readiness' : cTechnology,
+                                'Connection flexibility' : cFlexibility,
+                                'Geopolitical barriers' : cGeopolitical,
+                                'Economic lifetime' : cLifetime,
+                                'Production efficiency' : cEfficiency,
+                                'Waste and decomissioning' : cWaste
+                                                            
                             }
                             combination.update(grade_info)
-                            #print('Grade for',callable_smr)
-                            #print(smr_grade)
-                            #print(combination)
         
         #print(combinations) #See combinations 
         for item in combinations:
