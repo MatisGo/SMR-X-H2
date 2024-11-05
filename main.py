@@ -9,6 +9,7 @@ from technical_comparison import matching_combinations
 from criteria_function import criteria_ranking_function
 from C2P_display import TechnologyComparisonWindow  
 from results_display import ResultsDisplayWindow
+from h2_output_window import H2OutputAnalysisWindow
 
 class MainApplication:
     def __init__(self):
@@ -39,7 +40,7 @@ class MainApplication:
             self.data_srm,
             self.data_elec
         )
-        
+        #print(combinations)
         # Criteria ranking of all combinations
         final_ranking = criteria_ranking_function(
             self.data_srm,
@@ -81,12 +82,9 @@ class MainApplication:
 
     def show_h2_output_window(self, final_ranking):
         """Display H2 output analysis in a new window"""
-        h2_window = ctk.CTkToplevel(self.root)
-        h2_window.title("H2 Output Analysis")
-        h2_window.geometry("900x700")
+        H2OutputAnalysisWindow(self.root, final_ranking)
+
         
-        # Add your H2 output analysis implementation here
-        # TODO: Implement H2 output display
 
     def run(self):
         """Start the application"""

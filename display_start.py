@@ -41,7 +41,7 @@ class DisplayWindow:
         # Subtitle
         subtitle_label = ctk.CTkLabel(
             title_frame,
-            text="Analyze and compare technology solutions efficiently",
+            text="Analyse and compare technology solutions efficiently",
             font=ctk.CTkFont(size=16),
             text_color="gray70"
         )
