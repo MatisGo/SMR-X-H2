@@ -175,7 +175,7 @@ class H2OutputAnalysisWindow:
                    ha='center', va='bottom', color='white')
         
         # Add legend with better positioning
-        ax.legend(loc='upper right', bbox_to_anchor=(1, -0.15),
+        ax.legend(loc='upper right', bbox_to_anchor=(1, -0.25),
                  facecolor='#1a1a1a', edgecolor='white', labelcolor='white')
         
         # Adjust layout to prevent legend cutoff
