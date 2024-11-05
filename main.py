@@ -7,8 +7,9 @@ from excel_reader import (
 )
 from technical_comparison import matching_combinations
 from criteria_function import criteria_ranking_function
-from C2P_display import TechnologyComparisonWindow  
+from C2P_Display import TechnologyComparisonWindow  
 from results_display import ResultsDisplayWindow
+from results_display2 import ResultsDisplayWindow2
 from h2_output_window import H2OutputAnalysisWindow
 
 class MainApplication:
@@ -48,13 +49,15 @@ class MainApplication:
             combinations,
             self.criteria_weighting
         )
+        #print(final_ranking)
         # Display the results
         self.show_complete_comparison_results(final_ranking)
 
     def show_complete_comparison_results(self, final_ranking):
         """Display complete comparison results in a new window"""
-        ResultsDisplayWindow(self.root, final_ranking)
-
+        #ResultsDisplayWindow(self.root, final_ranking)
+        ResultsDisplayWindow2(self.root, final_ranking, self.data_elec, self.data_srm)
+        
     def compare_two_technologies(self):
         """Compare two technologies """
         # Create new window for technology comparison
