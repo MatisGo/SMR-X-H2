@@ -5,6 +5,8 @@ import pandas as pd
 import json
 from typing import Dict, List
 import numpy as np
+import tkinter as tk
+from tkinter import filedialog
 
 class ResultsDisplayWindow:
     def __init__(self, parent, final_ranking: List[Dict], data_elec: Dict, data_srm: Dict):
@@ -285,33 +287,29 @@ class ResultsDisplayWindow:
             ctk.CTkLabel(elec_frame, text="No Electrolysis Technology details available").pack(pady=2)
             
     def export_to_excel(self):
-        filename = "results_analysis.xlsx"
+        filename = self.export_filename("Excel")
+        filename = filename + ".xlsx"
         df = pd.DataFrame(self.final_ranking)
         df.to_excel(filename, index=False)
-        self.show_export_success("Excel")
-        
+
     def export_to_json(self):
-        filename = "results_analysis.json"
-        with open(filename, 'w') as f:
-            json.dump(self.final_ranking, f, indent=4)
-        self.show_export_success("JSON")
-        
+        f = filedialog.asksaveasfile(mode='w', defaultextension=".json")
+        if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+            return
+        json.dump(self.final_ranking, f, indent=4)
+        f.close()
+
     def export_to_text(self):
-        filename = "results_analysis.txt"
-        with open(filename, 'w') as f:
-            for combo in self.final_ranking:
-                f.write(f"Combination: {combo['Name']}\n")
-                for key, value in combo.items():
-                    if key != 'Name':
-                        f.write(f"{key}: {value}\n")
-                f.write("\n")
-        self.show_export_success("Text")
-        
-    def show_export_success(self, format_type):
-        dialog = ctk.CTkInputDialog(
-            text=f"Data exported successfully to {format_type} format!",
-            title="Export Success"
-        )
+        f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+        if f is None:  # asksaveasfile return `None` if dialog closed with "cancel".
+            return
+        for combo in self.final_ranking:
+            f.write(f"Combination: {combo['Name']}\n")
+            for key, value in combo.items():
+                if key != 'Name':
+                    f.write(f"{key}: {value}\n")
+            f.write("\n")
+        f.close()
         
     def on_closing(self):
         self.parent.deiconify()
