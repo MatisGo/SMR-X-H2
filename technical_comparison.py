@@ -39,9 +39,9 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
                         'SMR Project': smr_data['Project Name'],
                         'Electrolysis Technology': elec_data['Technology'],
                         'Temperature Difference (°C)': tempdiff, #Absolute value of the temperature difference
-                        'Max H2 Production (kg/h)': prodresults['1'],
-                        'SMR Thermal efficiency (%)': smr_data['Thermal efficiency'],
-                        'Production Efficiency (%)': production_efficiency,
+                        'Max H2 Production (kg/h)': round(prodresults['1'],2),
+                        'SMR Thermal efficiency (%)': round(smr_data['Thermal efficiency'],2),
+                        'Production Efficiency (%)': round(production_efficiency,2),
                         #'Tempertaure Output':smr_data['Temperature Output'],
                     }
                     matches.append(match_info)

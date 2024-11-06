@@ -39,22 +39,22 @@ def criteria_ranking_function(excel_data_srm,excel_data_electrolysis,combination
                             
                             final_grade= cCapex + cSafety + cRentabilité +cOpex + cEcological + cStartup + cScalability + cAvailability + cPlantArea + cTechnology + cFlexibility + cGeopolitical + cLifetime + cEfficiency + cWaste
                             grade_info ={
-                                'Grade': int(final_grade),
-                                'Capex': cCapex,
-                                'Safety': cSafety,
-                                'Rentability': cRentabilité,
-                                'Opex': cOpex,
-                                'Ecological Impact': cEcological,
-                                'Startup time' : cStartup,
-                                'Scalability' : cScalability,
-                                'Availability' : cAvailability,
-                                'Plant Area/Footprint' : cPlantArea,
-                                'Technology readiness' : cTechnology,
-                                'Connection flexibility' : cFlexibility,
-                                'Geopolitical barriers' : cGeopolitical,
-                                'Economic lifetime' : cLifetime,
-                                'Production efficiency' : cEfficiency,
-                                'Waste and decomissioning' : cWaste
+                                'Grade': round(final_grade,2),
+                                'Capex': round(cCapex,2),
+                                'Safety': round(cSafety,2),
+                                'Rentability': round(cRentabilité,2),
+                                'Opex': round(cOpex,2),
+                                'Ecological Impact': round(cEcological,2),
+                                'Startup time' : round(cStartup,2),
+                                'Scalability' : round(cScalability,2),
+                                'Availability' : round(cAvailability,2),
+                                'Plant Area/Footprint' : round(cPlantArea,2),
+                                'Technology readiness' : round(cTechnology,2),
+                                'Connection flexibility' : round(cFlexibility,2),
+                                'Geopolitical barriers' : round(cGeopolitical,2),
+                                'Economic lifetime' : round(cLifetime,2),
+                                'Production efficiency' : round(cEfficiency,2),
+                                'Waste and decomissioning' : round(cWaste,2)
                                                             
                             }
                             combination.update(grade_info)
