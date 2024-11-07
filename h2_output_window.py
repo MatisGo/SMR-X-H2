@@ -185,26 +185,6 @@ class H2OutputAnalysisWindow:
         canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
         canvas.draw()
         canvas.get_tk_widget().pack(fill="both", expand=True, padx=5, pady=5)
-        
-        # Add Export to Excel button
-        ctk.CTkButton(
-            self.graph_frame,
-            text="Export to Excel",
-            command=lambda: self.export_to_excel(nearest_combos)
-        ).pack(pady=10)
-        
-    def export_to_excel(self, combinations_to_export):
-        try:
-            # Convert combinations to DataFrame
-            df = pd.DataFrame([combo[1] for combo in combinations_to_export])
-            
-            # Save to Excel
-            filename = "h2_output_analysis.xlsx"
-            df.to_excel(filename, index=False)
-            messagebox.showinfo("Success", f"Data exported to {filename}")
-            
-        except Exception as e:
-            messagebox.showerror("Error", f"Failed to export: {str(e)}")
     
     def return_home(self):
         self.window.destroy()
