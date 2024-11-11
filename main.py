@@ -84,9 +84,7 @@ class MainApplication:
 
     def show_h2_output_window(self, final_ranking):
         """Display H2 output analysis in a new window"""
-        H2OutputAnalysisWindow(self.root, final_ranking)
-
-        
+        H2OutputAnalysisWindow(self.root, final_ranking)  
 
     def run(self):
         """Start the application"""

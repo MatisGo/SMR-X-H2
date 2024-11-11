@@ -18,8 +18,7 @@ def matching_combinations(excel_data_srm,excel_data_electrolysis):
             smr_outlet_coolant = float(smr_data.get('Outlet Coolant', 0))
             for elec_index, elec_data in excel_data_electrolysis.items():
                 elec_operating_temp_min = elec_data.get('Operating Temp Min')
-                elec_energy_consumption = float(elec_data.get('System Electricity Cosumption'))
-                elec_heat_consumption = float(elec_data.get('System heat needed'))
+                elec_energy_consumption = float(elec_data.get('System Electricity Consumption'))
                 elec_technology = elec_data.get('Technology')
                 if elec_technology != 'SOEC' and smr_power_output >= 1 or elec_technology == 'SOEC' and smr_power_output >= 1 and smr_thermal_output >= elec_operating_temp_min: 
                     #print(elec_technology)

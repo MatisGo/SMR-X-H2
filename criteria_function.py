@@ -34,7 +34,7 @@ def criteria_ranking_function(excel_data_srm,excel_data_electrolysis,combination
                             cLifetime=(float(smr_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))+(float(elec_data.get('Economic lifetime'))*float(criteria_weighting.get('Economic lifetime')))
                             cEfficiency=(float(smr_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))+(float(elec_data.get('Production efficiency'))*float(criteria_weighting.get('Production efficiency')))
                             cWaste=(float(smr_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))+(float(elec_data.get('Waste and decomissioning'))*float(criteria_weighting.get('Waste and decomissioning')))
-
+                            
 
                             
                             final_grade= cCapex + cSafety + cRentabilité +cOpex + cEcological + cStartup + cScalability + cAvailability + cPlantArea + cTechnology + cFlexibility + cGeopolitical + cLifetime + cEfficiency + cWaste
