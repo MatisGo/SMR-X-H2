@@ -51,7 +51,6 @@ class ResultsDisplayWindow:
         
         # Selected criteria for graph
         #self.selected_criteria = ["Rank"]  # Start with Rank as default
-        #self.available_criteria = ["Rank", "Production Efficiency (%)"]  # Will be expanded later
         
     def setup_graph_tab(self):
         # Create left and right frames
