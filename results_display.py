@@ -17,7 +17,7 @@ class ResultsDisplayWindow:
         self.data_srm = data_srm
         
         # Add Criteria here to be addded in the Excel
-        self.available_criteria = ["Rank", "Production Efficiency (%)","Grade","Capex","Safety","Rentability","Opex","Ecological Impact","Startup time","Scalability","Availability (h/year)","Plant Area/Footprint","Technology readiness","Connection flexibility","Geopolitical barriers","Economic lifetime","Production efficiency","Waste and decomissioning"]  
+        self.available_criteria = ["Rank", "Production Efficiency (%)","Grade","Capex","Safety","Rentability","Opex","Ecological impact","Startup time","Scalability","Availability (h/year)","Plant Area/Footprint","Technology readiness","Connection flexibility","Geopolitical barriers","Economic lifetime","Production efficiency","Waste and decomissioning"]  
         self.selected_criteria = ["Rank"]  # Start with Rank as default
         
 
