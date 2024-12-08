@@ -1,6 +1,6 @@
 # SMR-X-H2
 
-##Application
+## Application
 - Download the Output file
 - Create a shortcut or run directly the main.exe 
 
